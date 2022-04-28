@@ -10,19 +10,39 @@
 </head>
 <body>
     <div layout:fragment="content1">
-    <div class="container mt-2">
+    <div class="container mt-md-5 mb-md-5">
+        <div class="mb-2" sec:authorize="hasAuthority('ADMIN')">
+            <a class="btn btn-success" th:href="@{/admin/formPatients}">
+                <i class="fas fa-plus"></i>  Ajouter patient
+            </a>
+        </div>
         <div class="card">
             <div class="card-header">Liste des patients</div>
             <div class="card-body">
                 <form method="get" th:action="@{/user/index}">
-                    <label>Key word</label>
+                    <!--<label>Key word</label>
                     <input type="text" name="keyword" th:value="${keyword}">
-                    <button type="submit" class="btn btn-primary">Chercher</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class='fas fa-search'></i>  Chercher
+                    </button>-->
+                    <div class="input-group">
+                        <div class="form-outline">
+                            <input type="search" name="keyword" class="form-control" th:value="${keyword}" placeholder="Nom..." />
+                        </div>
+                        <div class="form-outline ms-1">
+                            <input name="score" type="number" min="0" th:value="${score}" class="form-control" placeholder="Score...">
+                        </div>
+                        <button type="submit" class="btn btn-primary ms-1">
+                            <i class='fas fa-search'></i>  Chercher
+                        </button>
+                    </div>
+
+
                 </form>
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>Id</th><th>Nom</th><th>Date</th><th>Malade</th><th>score</th>
+                        <th>Id</th><th>Nom</th><th>Date</th><th>Malade</th><th>score</th><th sec:authorize="hasAuthority('ADMIN')">action</th>
                     </tr>
                     </thead>
 
@@ -35,14 +55,17 @@
                         <td th:text="${p.score}"></td>
                         <td sec:authorize="hasAuthority('ADMIN')">
                             <a onclick="return confirm('Etes vous sure?')" class="btn btn-danger" th:href="@{/admin/delete(id=${p.id},keyword=${keyword},page=${currentPage})}">
-                                Delete
+                                <i class='fas fa-trash'></i>
+                            </a>
+                            <a class="btn btn-primary" th:href="@{/admin/editPatient(id=${p.id},keyword=${keyword},page=${currentPage})}">
+                                <i class='fas fa-edit'></i>
                             </a>
                         </td>
-                        <td sec:authorize="hasAuthority('ADMIN')">
+                        <!--<td sec:authorize="hasAuthority('ADMIN')">
                             <a class="btn btn-success" th:href="@{/admin/editPatient(id=${p.id},keyword=${keyword},page=${currentPage})}">
-                                Edit
+                                <i class='fas fa-edit'></i> Edit
                             </a>
-                        </td>
+                        </td>-->
                     </tr>
                     </tbody>
                 </table>

@@ -3,6 +3,7 @@ package ma.enset.jee_web.sec.service;
 import ma.enset.jee_web.sec.entites.AppRole;
 import ma.enset.jee_web.sec.entites.AppUser;
 
+
 public interface SecurityService {
 
     AppUser saveNewUser(String username, String password,String rePassword);

@@ -23,13 +23,16 @@ public class PatientController {
     @GetMapping(path = "/user/index")
     public  String patients(Model model,
                             @RequestParam(name = "page", defaultValue = "0") int page,
-                            @RequestParam(name = "size", defaultValue = "5") int size,
-                            @RequestParam(name = "keyword", defaultValue = "") String keyword ){
-        Page<Patient> pagepatients = patientRepository.findByNomContains(keyword,PageRequest.of(page,size));
+                            @RequestParam(name = "size", defaultValue = "6") int size,
+                            @RequestParam(name = "keyword", defaultValue = "") String keyword,
+                            @RequestParam(name = "score", defaultValue = "0") int score){
+        Page<Patient> pagepatients = patientRepository.findByNomContainsAndScoreGreaterThan(keyword,score,PageRequest.of(page,size));
+
         model.addAttribute("listpatients",pagepatients.getContent());
         model.addAttribute("pages", new int[pagepatients.getTotalPages()]);
         model.addAttribute("currentPage",page);
         model.addAttribute("keyword",keyword);
+        model.addAttribute("score", score);
         return "patients";
     }
     @GetMapping("/admin/delete")
@@ -78,6 +81,10 @@ public class PatientController {
         return "editPatient";
     }
 
+    @GetMapping("/user/about")
+    public String about(){
+        return "about";
+    }
 
 
 }

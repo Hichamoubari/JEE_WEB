@@ -6,10 +6,48 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .carousel-caption {
+            background-color: rgb(0 0 0 / 46%);
+            text-align: left;
+            padding: 25px;
+            border-radius: 10px;
+        }
+        ol.carousel-indicators {
+            display: block;
+            left: auto;
+            bottom: 50px;
+            right: 15px;
+        }
+        .carousel-indicators li {
+            height: 5px;
+            background-color: #3782c1;
+            opacity: .6;
+        }
+    </style>
 </head>
 <body>
 <div layout:fragment="content1">
-    <h1>hello mr hicham </h1>
+    <section id="banner">
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"></li>
+
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://img.freepik.com/free-photo/close-up-doctor-front-bright-background_53419-4416.jpg?w=996" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3><span style="color: #335273">We</span> care</h3>
+                        <p>For your health</p>
+                        <a href="#" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
 </div>
 </body>
 </html>
